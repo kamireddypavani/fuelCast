@@ -1,0 +1,28 @@
+:root {
+  --fc-bg-dark: #060b18;
+  --fc-text: #f8fafc;
+  --fc-text-muted: #94a3b8;
+  --sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  color-scheme: dark;
+  font-family: var(--sans);
+  background-color: var(--fc-bg-dark);
+  color: var(--fc-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Strict: Never allow window scroll on login */
+  background-color: var(--fc-bg-dark);
+}

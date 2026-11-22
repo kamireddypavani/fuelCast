@@ -1,0 +1,262 @@
+.sider {
+  position: fixed !important;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  background: var(--bg-secondary) !important;
+  border-right: 1px solid var(--border-color);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logoContainer {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px 0 16px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.collapsedLogo {
+  justify-content: center;
+  padding: 0;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.topCollapseBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.topCollapseBtn:hover {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+  border-color: var(--primary-color);
+}
+
+.collapsedExpandBtn {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.collapsedExpandBtn:hover {
+  background: var(--hover-bg);
+}
+
+/* Persona Badge Container */
+.personaContainer {
+  padding: 10px 14px 6px 14px;
+  flex-shrink: 0;
+}
+
+.personaCard {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.personaIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.personaAdmin {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  color: #ffffff;
+}
+
+.personaDistributor {
+  background: linear-gradient(135deg, #2563eb, #0284c7);
+  color: #ffffff;
+}
+
+.personaDealer {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #ffffff;
+}
+
+.personaMeta {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.personaRoleBadge {
+  font-size: 9.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #38bdf8;
+  line-height: 1.1;
+}
+
+.personaName {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.collapsedPersonaPill {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 4px 0;
+  flex-shrink: 0;
+}
+
+.collapsedPersonaDot {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 13px;
+  color: #ffffff;
+}
+
+/* Scrollable Menu Area */
+.menuScrollArea {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 4px;
+}
+
+.menuScrollArea::-webkit-scrollbar {
+  width: 4px;
+}
+
+.menuScrollArea::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.menu {
+  background: transparent !important;
+  border: none !important;
+}
+
+.menu :global(.ant-menu-item) {
+  border-radius: 8px !important;
+  margin: 3px 8px !important;
+  width: calc(100% - 16px) !important;
+  height: 38px !important;
+  line-height: 38px !important;
+  font-size: 13px !important;
+  transition: all 0.2s ease;
+}
+
+.menu :global(.ant-menu-item-selected) {
+  background: rgba(37, 99, 235, 0.16) !important;
+  color: #38bdf8 !important;
+  font-weight: 600;
+}
+
+.menu :global(.ant-menu-item-selected .ant-menu-item-icon) {
+  color: #38bdf8 !important;
+}
+
+/* Bottom Ambient Petrol Pump Widget */
+.ambientWidget {
+  margin: 10px 12px 14px 12px;
+  padding: 10px 12px;
+  background: linear-gradient(145deg, rgba(37, 99, 235, 0.1) 0%, rgba(13, 23, 51, 0.8) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+:global([data-theme='light']) .personaCard {
+  background: #f1f5f9;
+  border-color: rgba(37, 99, 235, 0.15);
+}
+
+:global([data-theme='light']) .ambientWidget {
+  background: #f8fafc;
+  border-color: rgba(37, 99, 235, 0.15);
+}
+
+.ambientBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.sparkleIcon {
+  color: #f59e0b;
+}
+
+.ambientSlogan {
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.ambientPumpsGraphic {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.miniPump {
+  flex: 1;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+  border-radius: 2px;
+  opacity: 0.8;
+}

@@ -1,0 +1,70 @@
+/* src/styles/global.css */
+/* Light Theme */
+:root {
+  --bg-primary: #f0f4f8;
+  --bg-secondary: #ffffff;
+  --panel-bg: #ffffff;
+  --border-color: rgba(37, 99, 235, 0.12);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --primary-color: #2563eb;
+  --primary-hover: #3b82f6;
+  --primary-contrast-text: #ffffff;
+  --hover-bg: rgba(37, 99, 235, 0.06);
+  --active-bg: rgba(37, 99, 235, 0.12);
+  --shadow-sm: 0 1px 3px rgba(37, 99, 235, 0.08);
+  --shadow-md: 0 4px 12px rgba(37, 99, 235, 0.12);
+}
+
+/* Dark Theme (FuelCast Midnight Blue) */
+[data-theme='dark'],
+[data-theme-id='dark'] {
+  --bg-primary: #060b18;
+  --bg-secondary: #0a1128;
+  --panel-bg: #0d1733;
+  --border-color: rgba(96, 165, 250, 0.16);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --primary-color: #2563eb;
+  --primary-hover: #3b82f6;
+  --primary-contrast-text: #ffffff;
+  --hover-bg: rgba(37, 99, 235, 0.12);
+  --active-bg: rgba(37, 99, 235, 0.2);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Modern Sleek Overlay Scrollbar (No chunky Windows grey scrollbars) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.22);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.45);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.22) transparent;
+}
