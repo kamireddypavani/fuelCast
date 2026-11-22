@@ -9,7 +9,7 @@ import {
   MessageSquare,
 } from 'lucide-react';
 import { MOCK_ORDERS } from '../../mock/fuelcastData';
-import type { RefillOrder } from '../../types/fuelcast';
+import type { RefillOrder, FuelType } from '../../types/fuelcast';
 
 export const DealerOrdersPage: React.FC = () => {
   // Scoped strictly to Sharma Fuels (pump-1)
@@ -19,14 +19,14 @@ export const DealerOrdersPage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
 
-  const handleCreateOrder = (values: { fuelType: string; quantityLiters: number }) => {
+  const handleCreateOrder = (values: { fuelType: FuelType; quantityLiters: number }) => {
     const newOrder: RefillOrder = {
       id: `ord-dlr-${Date.now()}`,
       orderNumber: `ORD-2026-${Math.floor(1000 + Math.random() * 9000)}`,
       pumpId: 'pump-1',
       pumpName: 'Sharma Fuels',
       location: 'Benz Circle, Vijayawada',
-      fuelType: values.fuelType,
+      fuelType: values.fuelType as FuelType,
       quantityLiters: values.quantityLiters,
       suggestedDate: 'Today',
       confirmedDate: 'Today',

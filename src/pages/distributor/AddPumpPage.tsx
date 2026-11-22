@@ -293,7 +293,7 @@ export const AddPumpPage: React.FC = () => {
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
-                    <Text orientation="left" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+                    <Text style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
                       Compartment {idx + 1}
                     </Text>
                     {tanks.length > 1 && (
@@ -384,7 +384,7 @@ export const AddPumpPage: React.FC = () => {
                         transition: 'all 0.2s',
                       }}
                     >
-                      <Space orientation="vertical" style={{ width: '100%' }}>
+                      <Space direction="vertical" style={{ width: '100%' }}>
                         <Radio value="Auto-sync">
                           <strong style={{ color: 'var(--text-primary)' }}>Auto-sync (IoT ATG)</strong>
                         </Radio>
@@ -407,7 +407,7 @@ export const AddPumpPage: React.FC = () => {
                         transition: 'all 0.2s',
                       }}
                     >
-                      <Space orientation="vertical" style={{ width: '100%' }}>
+                      <Space direction="vertical" style={{ width: '100%' }}>
                         <Radio value="Manual entry">
                           <strong style={{ color: 'var(--text-primary)' }}>Manual Entry</strong>
                         </Radio>
@@ -430,7 +430,7 @@ export const AddPumpPage: React.FC = () => {
                         transition: 'all 0.2s',
                       }}
                     >
-                      <Space orientation="vertical" style={{ width: '100%' }}>
+                      <Space direction="vertical" style={{ width: '100%' }}>
                         <Radio value="CSV upload">
                           <strong style={{ color: 'var(--text-primary)' }}>CSV Batch Upload</strong>
                         </Radio>

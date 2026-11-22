@@ -254,7 +254,6 @@ export const OrderKanbanPage: React.FC = () => {
 
   // Pipeline metrics
   const totalVolume = orders.reduce((sum, o) => sum + o.quantityLiters, 0);
-  const _criticalCount = orders.filter((o) => o.urgency === 'Critical' && o.stage !== 'delivered').length;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -539,8 +538,6 @@ export const OrderKanbanPage: React.FC = () => {
                   </div>
                 ) : (
                   colOrders.map((order) => {
-                    const _isCritical = order.urgency === 'Critical';
-                    const _isWarning = order.urgency === 'Warning';
                     const isModified = order.originalRequestedLiters !== undefined;
                     const fuelColor =
                       order.fuelType === 'Diesel'
@@ -863,10 +860,10 @@ export const OrderKanbanPage: React.FC = () => {
                               }}
                               onClick={() =>
                                 moveOrder(
-                                    order.id,
-                                    'on_the_way',
-                                    `Tanker ${order.truckNumber || 'AP16 TX 2690'} departed depot en route to ${order.pumpName}`
-                                  )
+                                  order.id,
+                                  'on_the_way',
+                                  `Tanker ${order.truckNumber || 'AP16 TX 2690'} departed depot en route to ${order.pumpName}`
+                                )
                               }
                             >
                               Dispatch Tanker
@@ -938,6 +935,7 @@ export const OrderKanbanPage: React.FC = () => {
                                 type="link"
                                 size="small"
                                 style={{ fontSize: 10.5, padding: 0, height: 'auto', color: isDark ? '#38BDF8' : '#0284C7' }}
+
                                 icon={<FileText size={10} />}
                                 onClick={() => {
                                   setSelectedOrder(order);
