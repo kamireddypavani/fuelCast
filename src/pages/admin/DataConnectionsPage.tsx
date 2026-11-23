@@ -13,8 +13,8 @@ export const DataConnectionsPage: React.FC = () => {
     }, 1200);
   };
 
-  const handleNudgeDealer = (name: string) => {
-    message.success(`Automated WhatsApp nudge sent to ${name}!`);
+  const handleNudgeOwner = (name: string) => {
+    message.success(`Automated WhatsApp nudge sent to station owner at ${name}!`);
   };
 
   const failedSyncColumns = [
@@ -35,7 +35,7 @@ export const DataConnectionsPage: React.FC = () => {
       key: 'reason',
       render: (reason: string) => {
         let color = 'error';
-        if (reason.includes('Dealer')) color = 'warning';
+        if (reason.includes('Dealer') || reason.includes('Owner')) color = 'warning';
         return <Tag color={color}>{reason}</Tag>;
       },
     },
@@ -65,9 +65,9 @@ export const DataConnectionsPage: React.FC = () => {
           <Button
             size="small"
             icon={<WhatsAppOutlined style={{ color: '#25D366' }} />}
-            onClick={() => handleNudgeDealer(r.pumpName)}
+            onClick={() => handleNudgeOwner(r.pumpName)}
           >
-            Nudge Dealer
+            Nudge Owner
           </Button>
         </Space>
       ),

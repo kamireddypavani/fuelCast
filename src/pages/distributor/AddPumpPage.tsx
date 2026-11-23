@@ -216,7 +216,7 @@ export const AddPumpPage: React.FC = () => {
               title={
                 <Space>
                   <WhatsAppOutlined style={{ color: '#25D366' }} />
-                  <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>2. Dealer Contact &amp; WhatsApp Alerts</span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>2. Station Owner Contact &amp; WhatsApp Alerts</span>
                 </Space>
               }
               style={{
@@ -229,9 +229,9 @@ export const AddPumpPage: React.FC = () => {
               <Row gutter={16}>
                 <Col xs={24} sm={8}>
                   <Form.Item
-                    label={<span style={{ color: 'var(--text-primary)' }}>Dealer / Manager Name</span>}
+                    label={<span style={{ color: 'var(--text-primary)' }}>Station Owner / Manager Name</span>}
                     name="dealerName"
-                    rules={[{ required: true, message: 'Dealer name required' }]}
+                    rules={[{ required: true, message: 'Owner name required' }]}
                   >
                     <Input placeholder="e.g. Ramesh Sharma" />
                   </Form.Item>
@@ -412,7 +412,7 @@ export const AddPumpPage: React.FC = () => {
                           <strong style={{ color: 'var(--text-primary)' }}>Manual Entry</strong>
                         </Radio>
                         <Text style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
-                          Dealer or manager enters morning/evening stick dips via WhatsApp bot or web form.
+                          Station owner or manager enters morning/evening stick dips via WhatsApp bot or web form.
                         </Text>
                       </Space>
                     </div>
@@ -510,7 +510,7 @@ export const AddPumpPage: React.FC = () => {
                     <div>
                       <strong style={{ color: 'var(--text-primary)' }}>1. WhatsApp Welcome Sent</strong>
                       <p style={{ margin: 0, fontSize: 12, color: 'var(--text-secondary)' }}>
-                        Dealer receives automated setup message with instructions for daily dip submissions.
+                        Station owner receives automated setup message with instructions for daily dip submissions.
                       </p>
                     </div>
                   ),

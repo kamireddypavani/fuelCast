@@ -126,7 +126,7 @@ export const AlertsCenterPage: React.FC = () => {
                           style={{ background: '#25D366', borderColor: '#25D366' }}
                           onClick={() => handleResolve(alert.id, 'WhatsApp reminder dispatched to pump manager')}
                         >
-                          Remind Dealer
+                          Remind Owner
                         </Button>
                       )}
 

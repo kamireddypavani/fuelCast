@@ -166,12 +166,12 @@ export const DistributorClientsPage: React.FC = () => {
     setNewName('');
     setNewTradeName('');
     setNewPhone('');
-    message.success(`Client Dealer "${newClient.tradeName}" onboarded with 3 Free Stations quota.`);
+    message.success(`Station Owner "${newClient.tradeName}" onboarded with 3 Free Stations quota.`);
   };
 
   const columns = [
     {
-      title: 'Station Owner (Dealer)',
+      title: 'Station Owner',
       key: 'name',
       render: (_: unknown, record: ClientDealer) => (
         <div>
@@ -275,14 +275,14 @@ export const DistributorClientsPage: React.FC = () => {
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <h2 style={{ margin: 0, color: 'var(--text-primary)', fontSize: 18, fontWeight: 700 }}>
-              Retail Clients &amp; Station Owners (Dealers)
+              Retail Clients &amp; Station Owners
             </h2>
             <Tag color="blue" style={{ borderRadius: 100, fontWeight: 700 }}>
-              {clients.length} Active Dealers
+              {clients.length} Active Owners
             </Tag>
           </div>
           <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
-            Distributor Tier 2 Management • Onboard retail dealers, monitor station holdings, and supply bulk fuel.
+            Distributor Tier 2 Management • Onboard station owners, monitor station holdings, and supply bulk fuel.
           </span>
         </div>
 
@@ -298,7 +298,7 @@ export const DistributorClientsPage: React.FC = () => {
             fontSize: 12,
           }}
         >
-          Onboard Client Dealer
+          Onboard Station Owner
         </Button>
       </div>
 
@@ -321,7 +321,7 @@ export const DistributorClientsPage: React.FC = () => {
           </div>
           <div>
             <div style={{ fontSize: 10, color: 'var(--text-secondary)', textTransform: 'uppercase', fontWeight: 600 }}>Total Clients</div>
-            <strong style={{ fontSize: 13, color: 'var(--text-primary)' }}>{clients.length} Registered Dealers</strong>
+            <strong style={{ fontSize: 13, color: 'var(--text-primary)' }}>{clients.length} Registered Owners</strong>
           </div>
         </div>
 
@@ -362,7 +362,7 @@ export const DistributorClientsPage: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <Building2 size={16} color="var(--primary-color)" />
             <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 13.5 }}>
-              Active Client Dealers &amp; Station Allowances
+              Active Station Owners &amp; Station Allowances
             </span>
           </div>
         }
@@ -388,19 +388,19 @@ export const DistributorClientsPage: React.FC = () => {
         title={
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <UserPlus size={18} color="var(--primary-color)" />
-            <span style={{ fontWeight: 800 }}>Onboard New Client Dealer (Station Owner)</span>
+            <span style={{ fontWeight: 800 }}>Onboard New Station Owner</span>
           </div>
         }
         open={isOnboardModalOpen}
         onCancel={() => setIsOnboardModalOpen(false)}
         onOk={handleOnboardClient}
-        okText="Onboard Dealer"
+        okText="Onboard Owner"
         cancelText="Cancel"
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 10 }}>
           <div>
             <label style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 4 }}>
-              Dealer Principal Name:
+              Station Owner Name:
             </label>
             <Input
               placeholder="e.g. Ramesh Sharma"
@@ -412,7 +412,7 @@ export const DistributorClientsPage: React.FC = () => {
 
           <div>
             <label style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 4 }}>
-              Dealership Business / Trade Name:
+              Station Business / Trade Name:
             </label>
             <Input
               placeholder="e.g. Sharma Fuels Enterprise"
@@ -497,7 +497,7 @@ export const DistributorClientsPage: React.FC = () => {
             }}
           >
             <CheckCircle2 size={14} color="#2563EB" />
-            <span>New dealer will automatically receive <strong>3 Free Stations</strong> allowance from Platform Admin.</span>
+            <span>New station owner will automatically receive <strong>3 Free Stations</strong> allowance from Platform Admin.</span>
           </div>
         </div>
       </Modal>

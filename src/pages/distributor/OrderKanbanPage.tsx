@@ -101,8 +101,8 @@ export const OrderKanbanPage: React.FC = () => {
   }[] = [
       {
         stage: 'waiting_for_dealer',
-        title: 'Dealer Requests',
-        description: 'Incoming orders submitted by station dealers',
+        title: 'Owner Requests',
+        description: 'Incoming orders submitted by station owners',
         icon: <Clock size={14} />,
         color: '#F59E0B',
         bgBadge: 'rgba(245, 158, 11, 0.12)',
@@ -962,7 +962,7 @@ export const OrderKanbanPage: React.FC = () => {
         title={
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <Edit3 size={16} color="#F59E0B" />
-            <span style={{ fontWeight: 800 }}>Modify Allocation &amp; Send Note to Dealer</span>
+            <span style={{ fontWeight: 800 }}>Modify Allocation &amp; Send Note to Owner</span>
           </div>
         }
         open={isModifyModalOpen}
@@ -983,7 +983,7 @@ export const OrderKanbanPage: React.FC = () => {
               }}
             >
               <div><strong>Station:</strong> {orderToModify.pumpName} ({orderToModify.location})</div>
-              <div><strong>Dealer:</strong> {orderToModify.dealerContact}</div>
+              <div><strong>Owner:</strong> {orderToModify.dealerContact}</div>
               <div style={{ marginTop: 4, color: isDark ? '#38BDF8' : '#0284C7', fontWeight: 700 }}>
                 Requested Volume: {orderToModify.quantityLiters.toLocaleString()} L of {orderToModify.fuelType}
               </div>
@@ -1010,7 +1010,7 @@ export const OrderKanbanPage: React.FC = () => {
 
             <div>
               <label style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 4 }}>
-                Distributor Comment for Dealer (WhatsApp &amp; Portal Notification):
+                Distributor Comment for Owner (WhatsApp &amp; Portal Notification):
               </label>
               <Input.TextArea
                 rows={3}
@@ -1075,13 +1075,13 @@ export const OrderKanbanPage: React.FC = () => {
 
             <div>
               <label style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 4 }}>
-                Explanation Note for Dealer:
+                Explanation Note for Owner:
               </label>
               <Input.TextArea
                 rows={3}
                 value={rejectionComment}
                 onChange={(e) => setRejectionComment(e.target.value)}
-                placeholder="Provide details for the dealer..."
+                placeholder="Provide details for the station owner..."
                 style={{ borderRadius: 6 }}
               />
             </div>
@@ -1128,14 +1128,14 @@ export const OrderKanbanPage: React.FC = () => {
                 }}
               >
                 <div style={{ color: isDark ? '#F59E0B' : '#B45309', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                  <Send size={13} /> Distributor Note to Dealer:
+                  <Send size={13} /> Distributor Note to Owner:
                 </div>
                 <div style={{ color: 'var(--text-primary)', fontStyle: 'italic' }}>
                   &ldquo;{selectedOrder.distributorNote}&rdquo;
                 </div>
                 {selectedOrder.originalRequestedLiters && (
                   <div style={{ color: 'var(--text-secondary)', fontSize: 11, marginTop: 4 }}>
-                    Dealer Requested: {selectedOrder.originalRequestedLiters.toLocaleString()} L ➔ Approved: {selectedOrder.quantityLiters.toLocaleString()} L
+                    Owner Requested: {selectedOrder.originalRequestedLiters.toLocaleString()} L ➔ Approved: {selectedOrder.quantityLiters.toLocaleString()} L
                   </div>
                 )}
               </div>
@@ -1168,7 +1168,7 @@ export const OrderKanbanPage: React.FC = () => {
                           : 4
                 }
                 items={[
-                  { title: '1. Dealer Refill Request', description: 'Dealer submitted order for required fuel' },
+                  { title: '1. Owner Refill Request', description: 'Station owner submitted order for required fuel' },
                   { title: '2. Distributor Approval & Queue', description: 'Volume approved & queued for depot allocation' },
                   { title: '3. Depot Gantry Loading', description: selectedOrder.depot },
                   { title: '4. In Transit (Tanker)', description: selectedOrder.truckNumber ? `Tanker: ${selectedOrder.truckNumber}` : 'Awaiting tanker' },
@@ -1187,7 +1187,7 @@ export const OrderKanbanPage: React.FC = () => {
               }}
             >
               <div style={{ fontSize: 12, fontWeight: 700, marginBottom: 10, color: 'var(--text-primary)' }}>
-                Retail Station &amp; Dealer:
+                Retail Station &amp; Owner:
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12.5 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -1199,7 +1199,7 @@ export const OrderKanbanPage: React.FC = () => {
                   <span>{selectedOrder.location}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-secondary)' }}>Dealer Phone:</span>
+                  <span style={{ color: 'var(--text-secondary)' }}>Owner Phone:</span>
                   <a href={`tel:${selectedOrder.dealerContact}`} style={{ color: isDark ? '#38BDF8' : '#0284C7', fontWeight: 600 }}>
                     {selectedOrder.dealerContact}
                   </a>
@@ -1213,7 +1213,7 @@ export const OrderKanbanPage: React.FC = () => {
                   icon={<Phone size={13} />}
                   onClick={() => window.open(`tel:${selectedOrder.dealerContact}`)}
                 >
-                  Call Dealer
+                  Call Owner
                 </Button>
                 <Button
                   size="small"

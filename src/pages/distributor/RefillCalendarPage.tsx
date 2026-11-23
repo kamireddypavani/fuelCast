@@ -96,7 +96,7 @@ export const RefillCalendarPage: React.FC = () => {
           fuel: 'Diesel',
           qty: '8,000 L',
           truck: 'Unassigned',
-          status: 'Dealer Request',
+          status: 'Owner Request',
         },
       ],
     },

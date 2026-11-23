@@ -78,7 +78,7 @@ const DEALER_PLANS: PlanDetail[] = [
     priceMonthly: '₹0 (Free Forever)',
     badge: 'Included by Admin',
     badgeColor: 'blue',
-    description: 'Complimentary tier provided by Platform Admin for all onboarding dealers.',
+    description: 'Complimentary tier provided by Platform Admin for all onboarding station owners.',
     features: [
       'Up to 3 Pump Stations free of charge',
       'Daily WhatsApp morning & evening stick dips',
@@ -124,7 +124,7 @@ const DEALER_PLANS: PlanDetail[] = [
     priceMonthly: '₹7,999 / mo',
     badge: 'Enterprise Network',
     badgeColor: 'purple',
-    description: 'For large dealer holding companies with pumps across multiple districts.',
+    description: 'For large station owner holding companies with pumps across multiple districts.',
     features: [
       'Up to 25 Pump Stations with unlimited tanks',
       'Multi-depot OMC gantry allocation (BPCL + IOCL + HPCL)',
@@ -273,7 +273,7 @@ export const DealerAddStationPage: React.FC = () => {
     };
 
     setStations([...stations, newStation]);
-    message.success(`Pump station "${newStation.name}" registered successfully to your dealer account!`);
+    message.success(`Pump station "${newStation.name}" registered successfully to your owner account!`);
     form.resetFields();
   };
 
@@ -328,7 +328,7 @@ export const DealerAddStationPage: React.FC = () => {
               </Tag>
             </div>
             <Text style={{ color: 'var(--text-secondary)', fontSize: 12 }}>
-              Station Owner / Dealer Portal • Manage existing retail pumps and request quota expansion from Administrator.
+              Station Owner Portal • Manage existing retail pumps and request quota expansion from Administrator.
             </Text>
           </div>
         </div>
@@ -885,7 +885,7 @@ export const DealerAddStationPage: React.FC = () => {
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 6 }}>
           <div style={{ fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.35 }}>
-            In accordance with platform governance, the <strong>Platform Administrator</strong> provisions distributor licenses and dealer station quotas.
+            In accordance with platform governance, the <strong>Platform Administrator</strong> provisions distributor licenses and station owner quotas.
           </div>
 
           <div

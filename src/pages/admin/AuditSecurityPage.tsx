@@ -14,7 +14,7 @@ export const AuditSecurityPage: React.FC = () => {
       id: 'aud-109',
       timestamp: 'Today, 11:34 AM IST',
       category: 'Orders',
-      actor: 'Ramesh Sharma (Dealer)',
+      actor: 'Ramesh Sharma (Owner)',
       action: 'Confirmed 12,000 L Diesel refill order ORD-2026-8841 via WhatsApp bot.',
       ipAddress: '49.207.214.12 (Airtel AP)',
       severity: 'Info',

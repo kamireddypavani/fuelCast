@@ -30,12 +30,14 @@ import {
   ThunderboltOutlined,
   InfoCircleOutlined,
 } from '@ant-design/icons';
+import { useAppSelector } from '../../redux/hooks';
 import { MOCK_COMPLAINTS } from '../../mock/fuelcastData';
 import type { DealerComplaint, ComplaintCategory } from '../../types/fuelcast';
 
 const { Title, Text } = Typography;
 
 export const DistributorComplaintsPage: React.FC = () => {
+  const isDark = useAppSelector((state) => state.theme.mode === 'dark');
   const [complaints, setComplaints] = useState<DealerComplaint[]>(MOCK_COMPLAINTS);
   const [statusTab, setStatusTab] = useState<'all' | 'pending' | 'resolved'>('all');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
@@ -79,15 +81,40 @@ export const DistributorComplaintsPage: React.FC = () => {
   const getCategoryInfo = (cat: ComplaintCategory) => {
     switch (cat) {
       case 'tanker_delay':
-        return { label: 'Tanker Delay', color: '#D97706', bg: '#FEF3C7', icon: <ClockCircleOutlined /> };
+        return {
+          label: 'Tanker Delay',
+          color: isDark ? '#FBBF24' : '#D97706',
+          bg: isDark ? 'rgba(245, 158, 11, 0.2)' : '#FEF3C7',
+          icon: <ClockCircleOutlined />,
+        };
       case 'dip_shortage':
-        return { label: 'Dip Shortage / Variance', color: '#DC2626', bg: '#FEE2E2', icon: <ExclamationCircleOutlined /> };
+        return {
+          label: 'Dip Shortage / Variance',
+          color: isDark ? '#F87171' : '#DC2626',
+          bg: isDark ? 'rgba(239, 68, 68, 0.2)' : '#FEE2E2',
+          icon: <ExclamationCircleOutlined />,
+        };
       case 'driver_conduct':
-        return { label: 'Driver Conduct', color: '#7C3AED', bg: '#EDE9FE', icon: <UserOutlined /> };
+        return {
+          label: 'Driver Conduct',
+          color: isDark ? '#C084FC' : '#7C3AED',
+          bg: isDark ? 'rgba(124, 58, 237, 0.2)' : '#EDE9FE',
+          icon: <UserOutlined />,
+        };
       case 'seal_quality':
-        return { label: 'Broken Seal / Security', color: '#EA580C', bg: '#FFEDD5', icon: <FileProtectOutlined /> };
+        return {
+          label: 'Broken Seal / Security',
+          color: isDark ? '#FB923C' : '#EA580C',
+          bg: isDark ? 'rgba(234, 88, 12, 0.2)' : '#FFEDD5',
+          icon: <FileProtectOutlined />,
+        };
       default:
-        return { label: 'General Concern', color: '#2563EB', bg: '#DBEAFE', icon: <InfoCircleOutlined /> };
+        return {
+          label: 'General Concern',
+          color: isDark ? '#60A5FA' : '#2563EB',
+          bg: isDark ? 'rgba(37, 99, 235, 0.2)' : '#DBEAFE',
+          icon: <InfoCircleOutlined />,
+        };
     }
   };
 
@@ -185,10 +212,18 @@ export const DistributorComplaintsPage: React.FC = () => {
         }}
       >
         <div>
-          <Title level={3} style={{ margin: 0, fontWeight: 700, fontSize: 22, color: '#0F172A' }}>
-            Dealer Disputes & Justifications
+          <Title
+            level={3}
+            style={{
+              margin: 0,
+              fontWeight: 700,
+              fontSize: 22,
+              color: isDark ? '#F8FAFC' : '#0F172A',
+            }}
+          >
+            Owner Disputes &amp; Justifications
           </Title>
-          <Text type="secondary" style={{ fontSize: 13 }}>
+          <Text style={{ fontSize: 13, color: isDark ? '#94A3B8' : '#64748B' }}>
             Review, investigate, and provide official justifications for delivery delays, shortages, or driver conduct.
           </Text>
         </div>
@@ -196,11 +231,17 @@ export const DistributorComplaintsPage: React.FC = () => {
         {/* Search & Category Filter right in header */}
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
           <Input
-            prefix={<SearchOutlined style={{ color: '#94A3B8' }} />}
+            prefix={<SearchOutlined style={{ color: isDark ? '#64748B' : '#94A3B8' }} />}
             placeholder="Search station, dealer, ticket..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            style={{ width: 240, borderRadius: 8 }}
+            style={{
+              width: 240,
+              borderRadius: 8,
+              background: isDark ? 'rgba(15, 23, 42, 0.7)' : '#FFFFFF',
+              borderColor: isDark ? 'rgba(255, 255, 255, 0.12)' : '#D9D9D9',
+              color: isDark ? '#F8FAFC' : undefined,
+            }}
             allowClear
           />
 
@@ -219,24 +260,26 @@ export const DistributorComplaintsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. Sleek KPI Metrics Strip (Compact & High Information Density) */}
+      {/* 2. Sleek Theme-Adaptive KPI Metrics Strip */}
       <Row gutter={[12, 12]} style={{ marginBottom: 20 }}>
         <Col xs={24} sm={12} md={6}>
           <div
             style={{
-              background: '#FFFFFF',
-              border: '1px solid #E2E8F0',
+              background: isDark
+                ? 'linear-gradient(145deg, rgba(17, 27, 49, 0.94) 0%, rgba(10, 16, 32, 0.98) 100%)'
+                : '#FFFFFF',
+              border: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid #E2E8F0',
               borderRadius: 10,
               padding: '12px 16px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+              boxShadow: isDark ? '0 2px 8px rgba(0,0,0,0.3)' : '0 1px 2px rgba(0,0,0,0.03)',
             }}
           >
             <div>
-              <div style={{ fontSize: 12, color: '#64748B', fontWeight: 600 }}>Total Complaints</div>
-              <div style={{ fontSize: 24, fontWeight: 700, color: '#0F172A', marginTop: 2 }}>
+              <div style={{ fontSize: 12, color: isDark ? '#94A3B8' : '#64748B', fontWeight: 600 }}>Total Complaints</div>
+              <div style={{ fontSize: 24, fontWeight: 700, color: isDark ? '#F8FAFC' : '#0F172A', marginTop: 2 }}>
                 {totalCount}
               </div>
             </div>
@@ -245,11 +288,11 @@ export const DistributorComplaintsPage: React.FC = () => {
                 width: 40,
                 height: 40,
                 borderRadius: 8,
-                background: '#F1F5F9',
+                background: isDark ? 'rgba(255, 255, 255, 0.06)' : '#F1F5F9',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#475569',
+                color: isDark ? '#CBD5E1' : '#475569',
               }}
             >
               <FileProtectOutlined style={{ fontSize: 20 }} />
@@ -260,19 +303,21 @@ export const DistributorComplaintsPage: React.FC = () => {
         <Col xs={24} sm={12} md={6}>
           <div
             style={{
-              background: '#FFFFFF',
-              border: '1px solid #E2E8F0',
+              background: isDark
+                ? 'linear-gradient(145deg, rgba(17, 27, 49, 0.94) 0%, rgba(10, 16, 32, 0.98) 100%)'
+                : '#FFFFFF',
+              border: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid #E2E8F0',
               borderLeft: '3.5px solid #E11D48',
               borderRadius: 10,
               padding: '12px 16px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+              boxShadow: isDark ? '0 2px 8px rgba(0,0,0,0.3)' : '0 1px 2px rgba(0,0,0,0.03)',
             }}
           >
             <div>
-              <div style={{ fontSize: 12, color: '#64748B', fontWeight: 600 }}>Action Required</div>
+              <div style={{ fontSize: 12, color: isDark ? '#94A3B8' : '#64748B', fontWeight: 600 }}>Action Required</div>
               <div style={{ fontSize: 24, fontWeight: 700, color: '#E11D48', marginTop: 2 }}>
                 {pendingCount}
               </div>
@@ -286,19 +331,21 @@ export const DistributorComplaintsPage: React.FC = () => {
         <Col xs={24} sm={12} md={6}>
           <div
             style={{
-              background: '#FFFFFF',
-              border: '1px solid #E2E8F0',
+              background: isDark
+                ? 'linear-gradient(145deg, rgba(17, 27, 49, 0.94) 0%, rgba(10, 16, 32, 0.98) 100%)'
+                : '#FFFFFF',
+              border: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid #E2E8F0',
               borderLeft: '3.5px solid #10B981',
               borderRadius: 10,
               padding: '12px 16px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+              boxShadow: isDark ? '0 2px 8px rgba(0,0,0,0.3)' : '0 1px 2px rgba(0,0,0,0.03)',
             }}
           >
             <div>
-              <div style={{ fontSize: 12, color: '#64748B', fontWeight: 600 }}>Justified & Settled</div>
+              <div style={{ fontSize: 12, color: isDark ? '#94A3B8' : '#64748B', fontWeight: 600 }}>Justified &amp; Settled</div>
               <div style={{ fontSize: 24, fontWeight: 700, color: '#10B981', marginTop: 2 }}>
                 {resolvedCount}
               </div>
@@ -312,20 +359,22 @@ export const DistributorComplaintsPage: React.FC = () => {
         <Col xs={24} sm={12} md={6}>
           <div
             style={{
-              background: '#FFFFFF',
-              border: '1px solid #E2E8F0',
+              background: isDark
+                ? 'linear-gradient(145deg, rgba(17, 27, 49, 0.94) 0%, rgba(10, 16, 32, 0.98) 100%)'
+                : '#FFFFFF',
+              border: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid #E2E8F0',
               borderLeft: '3.5px solid #2563EB',
               borderRadius: 10,
               padding: '12px 16px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+              boxShadow: isDark ? '0 2px 8px rgba(0,0,0,0.3)' : '0 1px 2px rgba(0,0,0,0.03)',
             }}
           >
             <div>
-              <div style={{ fontSize: 12, color: '#64748B', fontWeight: 600 }}>Credits Compensated</div>
-              <div style={{ fontSize: 24, fontWeight: 700, color: '#2563EB', marginTop: 2 }}>
+              <div style={{ fontSize: 12, color: isDark ? '#94A3B8' : '#64748B', fontWeight: 600 }}>Credits Compensated</div>
+              <div style={{ fontSize: 24, fontWeight: 700, color: isDark ? '#60A5FA' : '#2563EB', marginTop: 2 }}>
                 ₹{totalCredits.toLocaleString('en-IN')}
               </div>
             </div>
@@ -334,11 +383,11 @@ export const DistributorComplaintsPage: React.FC = () => {
                 width: 40,
                 height: 40,
                 borderRadius: 8,
-                background: '#EFF6FF',
+                background: isDark ? 'rgba(37, 99, 235, 0.18)' : '#EFF6FF',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#2563EB',
+                color: isDark ? '#60A5FA' : '#2563EB',
               }}
             >
               <DollarCircleOutlined style={{ fontSize: 20 }} />
@@ -361,7 +410,14 @@ export const DistributorComplaintsPage: React.FC = () => {
         <div style={{ display: 'flex', gap: 8 }}>
           <Button
             type={statusTab === 'all' ? 'primary' : 'default'}
-            style={{ borderRadius: 6, fontWeight: 600, fontSize: 13 }}
+            style={{
+              borderRadius: 6,
+              fontWeight: 600,
+              fontSize: 13,
+              background: statusTab !== 'all' && isDark ? 'rgba(255, 255, 255, 0.06)' : undefined,
+              borderColor: statusTab !== 'all' && isDark ? 'rgba(255, 255, 255, 0.12)' : undefined,
+              color: statusTab !== 'all' && isDark ? '#E2E8F0' : undefined,
+            }}
             onClick={() => setStatusTab('all')}
           >
             All Disputes ({totalCount})
@@ -369,7 +425,14 @@ export const DistributorComplaintsPage: React.FC = () => {
           <Button
             type={statusTab === 'pending' ? 'primary' : 'default'}
             danger={statusTab === 'pending'}
-            style={{ borderRadius: 6, fontWeight: 600, fontSize: 13 }}
+            style={{
+              borderRadius: 6,
+              fontWeight: 600,
+              fontSize: 13,
+              background: statusTab !== 'pending' && isDark ? 'rgba(255, 255, 255, 0.06)' : undefined,
+              borderColor: statusTab !== 'pending' && isDark ? 'rgba(255, 255, 255, 0.12)' : undefined,
+              color: statusTab !== 'pending' && isDark ? '#E2E8F0' : undefined,
+            }}
             onClick={() => setStatusTab('pending')}
           >
             Needs Justification ({pendingCount})
@@ -380,8 +443,9 @@ export const DistributorComplaintsPage: React.FC = () => {
               borderRadius: 6,
               fontWeight: 600,
               fontSize: 13,
-              backgroundColor: statusTab === 'resolved' ? '#10B981' : undefined,
-              borderColor: statusTab === 'resolved' ? '#10B981' : undefined,
+              backgroundColor: statusTab === 'resolved' ? '#10B981' : isDark ? 'rgba(255, 255, 255, 0.06)' : undefined,
+              borderColor: statusTab === 'resolved' ? '#10B981' : isDark ? 'rgba(255, 255, 255, 0.12)' : undefined,
+              color: statusTab === 'resolved' ? '#FFFFFF' : isDark ? '#E2E8F0' : undefined,
             }}
             onClick={() => setStatusTab('resolved')}
           >
@@ -389,7 +453,7 @@ export const DistributorComplaintsPage: React.FC = () => {
           </Button>
         </div>
 
-        <Text type="secondary" style={{ fontSize: 13 }}>
+        <Text style={{ fontSize: 13, color: isDark ? '#94A3B8' : '#64748B' }}>
           Showing <strong>{filteredTickets.length}</strong> of {totalCount} dispute tickets
         </Text>
       </div>
@@ -399,16 +463,16 @@ export const DistributorComplaintsPage: React.FC = () => {
         {filteredTickets.length === 0 ? (
           <div
             style={{
-              background: '#FFFFFF',
-              border: '1px solid #E2E8F0',
+              background: isDark ? 'rgba(15, 23, 42, 0.6)' : '#FFFFFF',
+              border: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid #E2E8F0',
               borderRadius: 12,
               textAlign: 'center',
               padding: '48px 20px',
             }}
           >
             <CheckCircleOutlined style={{ fontSize: 40, color: '#10B981', marginBottom: 12 }} />
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#0F172A' }}>No Disputes Matching Filter</div>
-            <Text type="secondary">All deliveries are running smoothly or match your search criteria.</Text>
+            <div style={{ fontSize: 16, fontWeight: 700, color: isDark ? '#F8FAFC' : '#0F172A' }}>No Disputes Matching Filter</div>
+            <Text style={{ color: isDark ? '#94A3B8' : '#64748B' }}>All deliveries are running smoothly or match your search criteria.</Text>
           </div>
         ) : (
           filteredTickets.map((ticket) => {
@@ -419,10 +483,14 @@ export const DistributorComplaintsPage: React.FC = () => {
               <div
                 key={ticket.id}
                 style={{
-                  background: '#FFFFFF',
+                  background: isDark
+                    ? 'linear-gradient(145deg, rgba(15, 23, 42, 0.92) 0%, rgba(10, 16, 32, 0.96) 100%)'
+                    : '#FFFFFF',
                   borderRadius: 12,
-                  border: isActionNeeded ? '1px solid #FCA5A5' : '1px solid #E2E8F0',
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                  border: isActionNeeded
+                    ? isDark ? '1px solid rgba(244, 63, 94, 0.35)' : '1px solid #FCA5A5'
+                    : isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid #E2E8F0',
+                  boxShadow: isDark ? '0 4px 16px rgba(0,0,0,0.3)' : '0 1px 3px rgba(0,0,0,0.04)',
                   padding: '16px 20px',
                   display: 'flex',
                   flexDirection: 'column',
@@ -438,17 +506,17 @@ export const DistributorComplaintsPage: React.FC = () => {
                     alignItems: 'center',
                     flexWrap: 'wrap',
                     gap: 10,
-                    borderBottom: '1px solid #F1F5F9',
+                    borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid #F1F5F9',
                     paddingBottom: 10,
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                    <span style={{ fontSize: 15, fontWeight: 700, color: '#0F172A' }}>
+                    <span style={{ fontSize: 15, fontWeight: 700, color: isDark ? '#F8FAFC' : '#0F172A' }}>
                       {ticket.pumpName}
                     </span>
-                    <span style={{ fontSize: 13, color: '#64748B' }}>•</span>
-                    <span style={{ fontSize: 13, color: '#334155', fontWeight: 500 }}>
-                      Dealer: {ticket.dealerName}
+                    <span style={{ fontSize: 13, color: isDark ? '#64748B' : '#94A3B8' }}>•</span>
+                    <span style={{ fontSize: 13, color: isDark ? '#CBD5E1' : '#334155', fontWeight: 500 }}>
+                      Owner: {ticket.dealerName}
                     </span>
                     <a
                       href={`tel:${ticket.dealerPhone}`}
@@ -457,8 +525,8 @@ export const DistributorComplaintsPage: React.FC = () => {
                         alignItems: 'center',
                         gap: 4,
                         fontSize: 12,
-                        color: '#2563EB',
-                        background: '#EFF6FF',
+                        color: isDark ? '#60A5FA' : '#2563EB',
+                        background: isDark ? 'rgba(37, 99, 235, 0.2)' : '#EFF6FF',
                         padding: '2px 8px',
                         borderRadius: 6,
                         fontWeight: 500,
@@ -469,10 +537,26 @@ export const DistributorComplaintsPage: React.FC = () => {
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <Tag style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', fontWeight: 600, margin: 0 }}>
+                    <Tag
+                      style={{
+                        background: isDark ? 'rgba(255, 255, 255, 0.06)' : '#F8FAFC',
+                        border: isDark ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid #E2E8F0',
+                        color: isDark ? '#E2E8F0' : '#334155',
+                        fontWeight: 600,
+                        margin: 0,
+                      }}
+                    >
                       {ticket.ticketNumber}
                     </Tag>
-                    <Tag style={{ background: '#EFF6FF', color: '#1D4ED8', border: '1px solid #BFDBFE', fontWeight: 600, margin: 0 }}>
+                    <Tag
+                      style={{
+                        background: isDark ? 'rgba(37, 99, 235, 0.2)' : '#EFF6FF',
+                        color: isDark ? '#93C5FD' : '#1D4ED8',
+                        border: isDark ? '1px solid rgba(96, 165, 250, 0.3)' : '1px solid #BFDBFE',
+                        fontWeight: 600,
+                        margin: 0,
+                      }}
+                    >
                       Order #{ticket.orderNumber}
                     </Tag>
                     <Tag
@@ -481,15 +565,15 @@ export const DistributorComplaintsPage: React.FC = () => {
                     >
                       {ticket.severity}
                     </Tag>
-                    <Text type="secondary" style={{ fontSize: 12, marginLeft: 4 }}>
+                    <Text style={{ fontSize: 12, marginLeft: 4, color: isDark ? '#94A3B8' : '#64748B' }}>
                       {ticket.createdAt}
                     </Text>
                   </div>
                 </div>
 
-                {/* Main Split Section: Left = Dealer's Issue, Right = Distributor Status & Action */}
+                {/* Main Split Section: Left = Owner's Issue, Right = Distributor Status & Action */}
                 <Row gutter={[16, 16]} align="stretch">
-                  {/* Left Column (60%): What the Dealer reported */}
+                  {/* Left Column (60%): What the Owner reported */}
                   <Col xs={24} md={14}>
                     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
                       <div>
@@ -516,13 +600,13 @@ export const DistributorComplaintsPage: React.FC = () => {
                         {/* Grievance Statement */}
                         <div
                           style={{
-                            background: '#F8FAFC',
-                            border: '1px solid #E2E8F0',
+                            background: isDark ? 'rgba(15, 23, 42, 0.75)' : '#F8FAFC',
+                            border: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid #E2E8F0',
                             borderLeft: `3.5px solid ${isActionNeeded ? '#EF4444' : '#10B981'}`,
                             borderRadius: 6,
                             padding: '10px 14px',
                             fontSize: 13.5,
-                            color: '#1E293B',
+                            color: isDark ? '#F1F5F9' : '#1E293B',
                             lineHeight: 1.55,
                           }}
                         >
@@ -538,17 +622,17 @@ export const DistributorComplaintsPage: React.FC = () => {
                           gap: 16,
                           marginTop: 10,
                           fontSize: 12,
-                          color: '#475569',
+                          color: isDark ? '#94A3B8' : '#475569',
                         }}
                       >
                         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-                          <CarOutlined style={{ color: '#2563EB' }} />
-                          <strong>Tanker:</strong> {ticket.truckNumber}
+                          <CarOutlined style={{ color: isDark ? '#60A5FA' : '#2563EB' }} />
+                          <strong style={{ color: isDark ? '#E2E8F0' : '#1E293B' }}>Tanker:</strong> {ticket.truckNumber}
                         </span>
                         <span>•</span>
                         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-                          <UserOutlined style={{ color: '#059669' }} />
-                          <strong>Driver:</strong> {ticket.driverName} ({ticket.driverPhone})
+                          <UserOutlined style={{ color: isDark ? '#34D399' : '#059669' }} />
+                          <strong style={{ color: isDark ? '#E2E8F0' : '#1E293B' }}>Driver:</strong> {ticket.driverName} ({ticket.driverPhone})
                         </span>
                       </div>
                     </div>
@@ -559,8 +643,12 @@ export const DistributorComplaintsPage: React.FC = () => {
                     <div
                       style={{
                         height: '100%',
-                        background: isActionNeeded ? '#FEF2F2' : '#F0FDF4',
-                        border: isActionNeeded ? '1px solid #FECACA' : '1px solid #BBF7D0',
+                        background: isActionNeeded
+                          ? isDark ? 'rgba(239, 68, 68, 0.1)' : '#FEF2F2'
+                          : isDark ? 'rgba(16, 185, 129, 0.1)' : '#F0FDF4',
+                        border: isActionNeeded
+                          ? isDark ? '1px solid rgba(239, 68, 68, 0.28)' : '1px solid #FECACA'
+                          : isDark ? '1px solid rgba(16, 185, 129, 0.28)' : '1px solid #BBF7D0',
                         borderRadius: 8,
                         padding: '12px 16px',
                         display: 'flex',
@@ -572,16 +660,16 @@ export const DistributorComplaintsPage: React.FC = () => {
                         <>
                           <div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                              <Badge status="error" text={<strong style={{ color: '#991B1B', fontSize: 13 }}>Action Required</strong>} />
-                              <span style={{ fontSize: 11.5, color: '#991B1B', fontWeight: 500 }}>
+                              <Badge status="error" text={<strong style={{ color: isDark ? '#FCA5A5' : '#991B1B', fontSize: 13 }}>Action Required</strong>} />
+                              <span style={{ fontSize: 11.5, color: isDark ? '#F87171' : '#991B1B', fontWeight: 500 }}>
                                 {ticket.status === 'investigating' ? 'Investigating Telematics' : 'Awaiting Justification'}
                               </span>
                             </div>
-                            <div style={{ fontSize: 12.5, color: '#7F1D1D', marginTop: 4, lineHeight: 1.4 }}>
+                            <div style={{ fontSize: 12.5, color: isDark ? '#FECDD3' : '#7F1D1D', marginTop: 4, lineHeight: 1.4 }}>
                               {ticket.expectedResolution ? (
-                                <span><strong>Dealer Requested:</strong> {ticket.expectedResolution}</span>
+                                <span><strong style={{ color: isDark ? '#FFF1F2' : '#7F1D1D' }}>Owner Requested:</strong> {ticket.expectedResolution}</span>
                               ) : (
-                                <span>Dealer is waiting for operational explanation & ETA.</span>
+                                <span>Station Owner is waiting for operational explanation &amp; ETA.</span>
                               )}
                             </div>
                           </div>
@@ -601,11 +689,11 @@ export const DistributorComplaintsPage: React.FC = () => {
                         <>
                           <div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                              <Badge status="success" text={<strong style={{ color: '#166534', fontSize: 13 }}>Justified & Settled</strong>} />
-                              <span style={{ fontSize: 11, color: '#15803D' }}>{ticket.justifiedAt}</span>
+                              <Badge status="success" text={<strong style={{ color: isDark ? '#6EE7B7' : '#166534', fontSize: 13 }}>Justified &amp; Settled</strong>} />
+                              <span style={{ fontSize: 11, color: isDark ? '#34D399' : '#15803D' }}>{ticket.justifiedAt}</span>
                             </div>
 
-                            <div style={{ fontSize: 12.5, color: '#14532D', marginTop: 4, lineHeight: 1.45 }}>
+                            <div style={{ fontSize: 12.5, color: isDark ? '#D1FAE5' : '#14532D', marginTop: 4, lineHeight: 1.45 }}>
                               {ticket.distributorJustification}
                             </div>
 
@@ -613,11 +701,11 @@ export const DistributorComplaintsPage: React.FC = () => {
                               <div
                                 style={{
                                   marginTop: 8,
-                                  background: '#DCFCE7',
+                                  background: isDark ? 'rgba(16, 185, 129, 0.2)' : '#DCFCE7',
                                   padding: '4px 8px',
                                   borderRadius: 4,
                                   fontSize: 11.5,
-                                  color: '#166534',
+                                  color: isDark ? '#A7F3D0' : '#166534',
                                   fontWeight: 600,
                                 }}
                               >
@@ -630,7 +718,13 @@ export const DistributorComplaintsPage: React.FC = () => {
                             <Button
                               size="small"
                               icon={<EditOutlined />}
-                              style={{ borderRadius: 6, fontSize: 12 }}
+                              style={{
+                                borderRadius: 6,
+                                fontSize: 12,
+                                background: isDark ? 'rgba(255, 255, 255, 0.06)' : undefined,
+                                borderColor: isDark ? 'rgba(255, 255, 255, 0.12)' : undefined,
+                                color: isDark ? '#E2E8F0' : undefined,
+                              }}
                               onClick={() => handleOpenJustifyModal(ticket)}
                             >
                               Edit Note / Compensation
@@ -652,8 +746,8 @@ export const DistributorComplaintsPage: React.FC = () => {
         title={
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <FileProtectOutlined style={{ color: '#2563EB', fontSize: 18 }} />
-            <span style={{ fontWeight: 700 }}>
-              Submit Justification & Resolve Dispute: {justifyingTicket?.ticketNumber}
+            <span style={{ fontWeight: 700, color: isDark ? '#F8FAFC' : '#0F172A' }}>
+              Submit Justification &amp; Resolve Dispute: {justifyingTicket?.ticketNumber}
             </span>
           </div>
         }
@@ -665,41 +759,81 @@ export const DistributorComplaintsPage: React.FC = () => {
       >
         {justifyingTicket && (
           <div>
-            {/* Dealer Grievance Context */}
+            {/* Owner Grievance Context */}
             <div
               style={{
-                background: '#F8FAFC',
-                border: '1px solid #E2E8F0',
+                background: isDark ? 'rgba(15, 23, 42, 0.75)' : '#F8FAFC',
+                border: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid #E2E8F0',
                 borderRadius: 8,
                 padding: '10px 14px',
                 margin: '12px 0 16px 0',
               }}
             >
-              <div style={{ fontSize: 12, color: '#64748B', fontWeight: 600, textTransform: 'uppercase' }}>
-                Dealer Grievance ({justifyingTicket.pumpName} - {justifyingTicket.dealerName}):
+              <div style={{ fontSize: 12, color: isDark ? '#94A3B8' : '#64748B', fontWeight: 600, textTransform: 'uppercase' }}>
+                Owner Grievance ({justifyingTicket.pumpName} - {justifyingTicket.dealerName}):
               </div>
-              <div style={{ fontSize: 13, color: '#0F172A', marginTop: 3 }}>
-                "{justifyingTicket.dealerMessage}"
+              <div style={{ fontSize: 13, color: isDark ? '#F1F5F9' : '#0F172A', marginTop: 3 }}>
+                &ldquo;{justifyingTicket.dealerMessage}&rdquo;
               </div>
             </div>
 
             {/* Quick 1-Click Justification Templates */}
             <div style={{ marginBottom: 16 }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#475569', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 5 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: isDark ? '#94A3B8' : '#475569', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 5 }}>
                 <ThunderboltOutlined style={{ color: '#F59E0B' }} />
                 <span>Quick Justification Templates (Click to auto-fill):</span>
               </div>
               <Space wrap size={8}>
-                <Button size="small" style={{ borderRadius: 6, fontSize: 12 }} onClick={() => applyQuickTemplate('gantry_delay')}>
-                  ⚡ Gantry Outage & Demurrage Waiver
+                <Button
+                  size="small"
+                  style={{
+                    borderRadius: 6,
+                    fontSize: 12,
+                    background: isDark ? 'rgba(255, 255, 255, 0.06)' : undefined,
+                    borderColor: isDark ? 'rgba(255, 255, 255, 0.15)' : undefined,
+                    color: isDark ? '#E2E8F0' : undefined,
+                  }}
+                  onClick={() => applyQuickTemplate('gantry_delay')}
+                >
+                  ⚡ Gantry Outage &amp; Demurrage Waiver
                 </Button>
-                <Button size="small" style={{ borderRadius: 6, fontSize: 12 }} onClick={() => applyQuickTemplate('traffic_jam')}>
-                  🚦 Highway Traffic & Live GPS
+                <Button
+                  size="small"
+                  style={{
+                    borderRadius: 6,
+                    fontSize: 12,
+                    background: isDark ? 'rgba(255, 255, 255, 0.06)' : undefined,
+                    borderColor: isDark ? 'rgba(255, 255, 255, 0.15)' : undefined,
+                    color: isDark ? '#E2E8F0' : undefined,
+                  }}
+                  onClick={() => applyQuickTemplate('traffic_jam')}
+                >
+                  🚦 Highway Traffic &amp; Live GPS
                 </Button>
-                <Button size="small" style={{ borderRadius: 6, fontSize: 12 }} onClick={() => applyQuickTemplate('temp_dip')}>
+                <Button
+                  size="small"
+                  style={{
+                    borderRadius: 6,
+                    fontSize: 12,
+                    background: isDark ? 'rgba(255, 255, 255, 0.06)' : undefined,
+                    borderColor: isDark ? 'rgba(255, 255, 255, 0.15)' : undefined,
+                    color: isDark ? '#E2E8F0' : undefined,
+                  }}
+                  onClick={() => applyQuickTemplate('temp_dip')}
+                >
                   🌡️ Thermal Dip Shortage Credit Note
                 </Button>
-                <Button size="small" style={{ borderRadius: 6, fontSize: 12 }} onClick={() => applyQuickTemplate('driver_safety')}>
+                <Button
+                  size="small"
+                  style={{
+                    borderRadius: 6,
+                    fontSize: 12,
+                    background: isDark ? 'rgba(255, 255, 255, 0.06)' : undefined,
+                    borderColor: isDark ? 'rgba(255, 255, 255, 0.15)' : undefined,
+                    color: isDark ? '#E2E8F0' : undefined,
+                  }}
+                  onClick={() => applyQuickTemplate('driver_safety')}
+                >
                   🛡️ Driver Safety Drill
                 </Button>
               </Space>
@@ -743,9 +877,9 @@ export const DistributorComplaintsPage: React.FC = () => {
               </Row>
 
               <Form.Item
-                label="Official Explanation & Findings (Transmitted to Dealer)"
+                label="Official Explanation &amp; Findings (Transmitted to Owner)"
                 name="distributorJustification"
-                rules={[{ required: true, message: 'Please provide formal explanation for the dealer' }]}
+                rules={[{ required: true, message: 'Please provide formal explanation for the station owner' }]}
               >
                 <Input.TextArea
                   rows={4}
@@ -784,7 +918,7 @@ export const DistributorComplaintsPage: React.FC = () => {
                     htmlType="submit"
                     style={{ background: '#2563EB', borderColor: '#2563EB', borderRadius: 6, fontWeight: 600 }}
                   >
-                    Publish Justification & Update
+                    Publish Justification &amp; Update
                   </Button>
                 </Space>
               </div>

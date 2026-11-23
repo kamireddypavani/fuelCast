@@ -35,7 +35,7 @@ const DEFAULT_CREDENTIALS: Record<UserRole, { email: string; label: string }> = 
   },
   DEALER: {
     email: 'dealer@sharmafuels.in',
-    label: 'Retail Station Dealer (Ramesh Sharma)',
+    label: 'Station Owner (Ramesh Sharma)',
   },
 };
 
@@ -77,7 +77,7 @@ export const LoginPage: React.FC = () => {
         message.success('Welcome Aditya Reddy! Entering Platform Administrator Portal.');
         navigate('/admin/dashboard');
       } else if (roleToLogin === 'DEALER') {
-        message.success('Welcome Ramesh Sharma! Entering Retail Dealer Station Portal.');
+        message.success('Welcome Ramesh Sharma! Entering Station Owner Portal.');
         navigate('/dealer/dashboard');
       } else {
         message.success('Welcome Anil Varma! Entering Regional Distributor Portal.');
@@ -130,7 +130,7 @@ export const LoginPage: React.FC = () => {
               <span className={`${styles.bulletIcon} ${styles.iconGreen}`}>
                 <WhatsAppOutlined />
               </span>
-              <span className={styles.bulletText}>WhatsApp alerts to dealers and distributors</span>
+              <span className={styles.bulletText}>WhatsApp alerts to station owners and distributors</span>
             </li>
             <li className={styles.bulletItem}>
               <span className={`${styles.bulletIcon} ${styles.iconCyan}`}>
@@ -162,7 +162,7 @@ export const LoginPage: React.FC = () => {
                 onClick={() => handleRoleSelect('DEALER')}
               >
                 <Gauge size={13} />
-                <span>Dealer</span>
+                <span>Station Owner</span>
               </button>
               <button
                 type="button"
@@ -269,7 +269,7 @@ export const LoginPage: React.FC = () => {
                   loading={isLoading}
                   block
                 >
-                  <span>Log In to {selectedRole === 'ADMIN' ? 'Admin Portal' : selectedRole === 'DEALER' ? 'Dealer Portal' : 'Distributor Portal'}</span>
+                  <span>Log In to {selectedRole === 'ADMIN' ? 'Admin Portal' : selectedRole === 'DEALER' ? 'Owner Portal' : 'Distributor Portal'}</span>
                   <ArrowRightOutlined style={{ fontSize: 13, marginLeft: 6 }} />
                 </Button>
               </Form.Item>

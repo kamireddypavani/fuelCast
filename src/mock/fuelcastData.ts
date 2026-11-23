@@ -554,7 +554,7 @@ export const MOCK_ALERTS: AlertItem[] = [
     timestamp: '1 hour ago',
     pumpId: 'pump-5',
     pumpName: 'Annapurna Auto Fuels',
-    actionLabel: 'Remind Dealer',
+    actionLabel: 'Remind Owner',
     resolved: false,
   },
   {
@@ -574,7 +574,7 @@ export const MOCK_ALERTS: AlertItem[] = [
     type: 'critical_tank',
     severity: 'high',
     title: 'Krishna Fuels: MS Petrol critical',
-    description: 'Only 3,200 L remaining (1.8 days). Dealer confirmed order ORD-2026-8839.',
+    description: 'Only 3,200 L remaining (1.8 days). Owner confirmed order ORD-2026-8839.',
     timestamp: '2 hours ago',
     pumpId: 'pump-2',
     pumpName: 'Krishna Fuels',

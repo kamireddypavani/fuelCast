@@ -1088,7 +1088,7 @@ export const NetworkMapDashboard: React.FC = () => {
                 <strong>{selectedPump.area}, {selectedPump.city}</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--text-secondary)' }}>Dealer Contact:</span>
+                <span style={{ color: 'var(--text-secondary)' }}>Owner Contact:</span>
                 <span style={{ color: '#2563EB', fontWeight: 600 }}>{selectedPump.dealerPhone}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>

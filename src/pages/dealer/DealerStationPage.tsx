@@ -300,7 +300,7 @@ export const DealerStationPage: React.FC = () => {
             <span>•</span>
             <span>Supply Depot: <strong>{myPump.depot}</strong> (Lead time: {myPump.leadTimeDays}d)</span>
             <span>•</span>
-            <span>Dealer: <strong>{myPump.dealerName}</strong> ({myPump.dealerPhone})</span>
+            <span>Owner: <strong>{myPump.dealerName}</strong> ({myPump.dealerPhone})</span>
           </div>
         </div>
 
