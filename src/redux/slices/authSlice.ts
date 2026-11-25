@@ -35,7 +35,7 @@ export const PRESET_USERS: Record<UserRole, UserSession> = {
     id: 'usr-dealer-1',
     name: 'Ramesh Sharma',
     email: 'dealer@sharmafuels.in',
-    title: 'Pump Station Owner',
+    title: 'Pump Station Retailer',
     role: 'DEALER',
     tenantName: 'Sharma Fuels',
     stationName: 'Sharma Fuels (Benz Circle)',

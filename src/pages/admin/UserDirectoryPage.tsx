@@ -13,7 +13,7 @@ export const UserDirectoryPage: React.FC = () => {
     {
       id: 'u-1',
       name: 'Ramesh Sharma',
-      role: 'Station Owner',
+      role: 'Station Retailer',
       tenant: 'Sharma Fuels',
       phone: '+91 98765 43210',
       email: 'ramesh.sharma@gmail.com',
@@ -43,7 +43,7 @@ export const UserDirectoryPage: React.FC = () => {
     {
       id: 'u-4',
       name: 'Suresh Reddy',
-      role: 'Station Owner',
+      role: 'Station Retailer',
       tenant: 'Balaji Petroleum Center',
       phone: '+91 99887 76655',
       email: 'balaji.gachibowli@gmail.com',
@@ -89,7 +89,7 @@ export const UserDirectoryPage: React.FC = () => {
       key: 'role',
       render: (role: string) => {
         let color = 'blue';
-        if (role.includes('Owner') || role.includes('Dealer')) color = 'orange';
+        if (role.includes('Retailer') || role.includes('Owner') || role.includes('Dealer')) color = 'orange';
         if (role.includes('Driver')) color = 'green';
         if (role.includes('Admin')) color = 'purple';
         return <Tag color={color}>{role}</Tag>;
@@ -183,7 +183,7 @@ export const UserDirectoryPage: React.FC = () => {
             style={{ width: 180 }}
           >
             <Option value="All">All User Roles</Option>
-            <Option value="Owner">Station Owners</Option>
+            <Option value="Retailer">Station Retailers</Option>
             <Option value="Driver">Tanker Drivers</Option>
             <Option value="Distributor">Distributor Staff</Option>
             <Option value="Admin">Platform Admins</Option>

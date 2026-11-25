@@ -55,7 +55,7 @@ export const DealerProfilePage: React.FC = () => {
                 <span style={{ fontWeight: 600 }}>Sharma Fuels</span>
               </Descriptions.Item>
               <Descriptions.Item label="Station Identifier">FC-VJA-01</Descriptions.Item>
-              <Descriptions.Item label="Station Owner">Ramesh Sharma</Descriptions.Item>
+              <Descriptions.Item label="Station Retailer">Ramesh Sharma</Descriptions.Item>
               <Descriptions.Item label="Contact Phone">+91 98765 43210</Descriptions.Item>
               <Descriptions.Item label="Official Email">dealer@sharmafuels.in</Descriptions.Item>
               <Descriptions.Item label="Station Address">

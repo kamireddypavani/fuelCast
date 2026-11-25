@@ -98,11 +98,11 @@ export const TeamRolesPage: React.FC = () => {
       dataIndex: 'twoFactor',
       key: 'twoFactor',
       render: (twoFactor: string) => {
-        const isEnforced = twoFactor.includes('Enforced');
+        const isEnforced = (twoFactor || '').includes('Enforced');
         return (
           <Badge
             status={isEnforced ? 'success' : 'warning'}
-            text={<span style={{ color: 'var(--text-primary)', fontSize: 12 }}>{twoFactor}</span>}
+            text={<span style={{ color: 'var(--text-primary)', fontSize: 12 }}>{twoFactor || 'Not Enabled'}</span>}
           />
         );
       },

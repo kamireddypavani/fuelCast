@@ -221,7 +221,7 @@ export const DistributorComplaintsPage: React.FC = () => {
               color: isDark ? '#F8FAFC' : '#0F172A',
             }}
           >
-            Owner Disputes &amp; Justifications
+            Retailer Disputes &amp; Justifications
           </Title>
           <Text style={{ fontSize: 13, color: isDark ? '#94A3B8' : '#64748B' }}>
             Review, investigate, and provide official justifications for delivery delays, shortages, or driver conduct.
@@ -516,7 +516,7 @@ export const DistributorComplaintsPage: React.FC = () => {
                     </span>
                     <span style={{ fontSize: 13, color: isDark ? '#64748B' : '#94A3B8' }}>•</span>
                     <span style={{ fontSize: 13, color: isDark ? '#CBD5E1' : '#334155', fontWeight: 500 }}>
-                      Owner: {ticket.dealerName}
+                      Retailer: {ticket.dealerName}
                     </span>
                     <a
                       href={`tel:${ticket.dealerPhone}`}
@@ -667,9 +667,9 @@ export const DistributorComplaintsPage: React.FC = () => {
                             </div>
                             <div style={{ fontSize: 12.5, color: isDark ? '#FECDD3' : '#7F1D1D', marginTop: 4, lineHeight: 1.4 }}>
                               {ticket.expectedResolution ? (
-                                <span><strong style={{ color: isDark ? '#FFF1F2' : '#7F1D1D' }}>Owner Requested:</strong> {ticket.expectedResolution}</span>
+                                <span><strong style={{ color: isDark ? '#FFF1F2' : '#7F1D1D' }}>Retailer Requested:</strong> {ticket.expectedResolution}</span>
                               ) : (
-                                <span>Station Owner is waiting for operational explanation &amp; ETA.</span>
+                                <span>Station Retailer is waiting for operational explanation &amp; ETA.</span>
                               )}
                             </div>
                           </div>
@@ -770,7 +770,7 @@ export const DistributorComplaintsPage: React.FC = () => {
               }}
             >
               <div style={{ fontSize: 12, color: isDark ? '#94A3B8' : '#64748B', fontWeight: 600, textTransform: 'uppercase' }}>
-                Owner Grievance ({justifyingTicket.pumpName} - {justifyingTicket.dealerName}):
+                Retailer Grievance ({justifyingTicket.pumpName} - {justifyingTicket.dealerName}):
               </div>
               <div style={{ fontSize: 13, color: isDark ? '#F1F5F9' : '#0F172A', marginTop: 3 }}>
                 &ldquo;{justifyingTicket.dealerMessage}&rdquo;
@@ -877,9 +877,9 @@ export const DistributorComplaintsPage: React.FC = () => {
               </Row>
 
               <Form.Item
-                label="Official Explanation &amp; Findings (Transmitted to Owner)"
+                label="Official Explanation &amp; Findings (Transmitted to Retailer)"
                 name="distributorJustification"
-                rules={[{ required: true, message: 'Please provide formal explanation for the station owner' }]}
+                rules={[{ required: true, message: 'Please provide formal explanation for the station retailer' }]}
               >
                 <Input.TextArea
                   rows={4}

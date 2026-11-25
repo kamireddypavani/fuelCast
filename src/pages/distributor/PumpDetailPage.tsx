@@ -108,7 +108,7 @@ export const PumpDetailPage: React.FC = () => {
             onClick={() => window.open(`tel:${pump.dealerPhone}`)}
             style={{ fontWeight: 600, borderRadius: 8 }}
           >
-            Call Owner
+            Call Retailer
           </Button>
           <Button
             type="primary"
@@ -340,7 +340,7 @@ export const PumpDetailPage: React.FC = () => {
         {/* Right: Dealer Info Card & WhatsApp Action */}
         <Col xs={24} lg={8}>
           <Card
-            title={<span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>Owner Operations Contact</span>}
+            title={<span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>Retailer Operations Contact</span>}
             bordered={false}
             style={{
               background: 'var(--panel-bg)',
@@ -372,7 +372,7 @@ export const PumpDetailPage: React.FC = () => {
                     {pump.dealerName}
                   </div>
                   <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
-                    Station Owner &amp; Retail Partner
+                    Station Retailer &amp; Retail Partner
                   </div>
                 </div>
               </div>
@@ -408,7 +408,7 @@ export const PumpDetailPage: React.FC = () => {
                   onClick={() => message.success(`Login credentials SMS re-sent to ${pump.dealerPhone}`)}
                   style={{ borderRadius: 8, fontSize: 12 }}
                 >
-                  Resend Owner Portal Login
+                  Resend Retailer Portal Login
                 </Button>
               </div>
             </div>

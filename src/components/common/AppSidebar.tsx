@@ -119,12 +119,12 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed, onToggleColla
     {
       key: '/distributor/clients',
       icon: <Users size={18} />,
-      label: 'Owner Management',
+      label: 'Retailer Management',
     },
     {
       key: '/distributor/complaints',
       icon: <AlertCircle size={18} />,
-      label: 'Owner Assistance',
+      label: 'Retailer Assistance',
     },
     {
       key: '/distributor/calendar',
@@ -216,10 +216,10 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed, onToggleColla
       icon: <Building2 size={16} />,
     },
     DEALER: {
-      badge: 'Station Owner',
+      badge: 'Station Retailer',
       name: currentUser?.stationName || 'Sharma Fuels (Benz Circle)',
       className: styles.personaDealer,
-      letter: 'O',
+      letter: 'R',
       icon: <Gauge size={16} />,
     },
   }[role];

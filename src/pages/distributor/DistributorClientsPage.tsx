@@ -166,12 +166,12 @@ export const DistributorClientsPage: React.FC = () => {
     setNewName('');
     setNewTradeName('');
     setNewPhone('');
-    message.success(`Station Owner "${newClient.tradeName}" onboarded with 3 Free Stations quota.`);
+    message.success(`Station Retailer "${newClient.tradeName}" onboarded with 3 Free Stations quota.`);
   };
 
   const columns = [
     {
-      title: 'Station Owner',
+      title: 'Station Retailer',
       key: 'name',
       render: (_: unknown, record: ClientDealer) => (
         <div>
@@ -275,14 +275,14 @@ export const DistributorClientsPage: React.FC = () => {
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <h2 style={{ margin: 0, color: 'var(--text-primary)', fontSize: 18, fontWeight: 700 }}>
-              Retail Clients &amp; Station Owners
+              Retail Clients &amp; Station Retailers
             </h2>
             <Tag color="blue" style={{ borderRadius: 100, fontWeight: 700 }}>
-              {clients.length} Active Owners
+              {clients.length} Active Retailers
             </Tag>
           </div>
           <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
-            Distributor Tier 2 Management • Onboard station owners, monitor station holdings, and supply bulk fuel.
+            Distributor Tier 2 Management • Onboard station retailers, monitor station holdings, and supply bulk fuel.
           </span>
         </div>
 
@@ -298,7 +298,7 @@ export const DistributorClientsPage: React.FC = () => {
             fontSize: 12,
           }}
         >
-          Onboard Station Owner
+          Onboard Station Retailer
         </Button>
       </div>
 
@@ -321,7 +321,7 @@ export const DistributorClientsPage: React.FC = () => {
           </div>
           <div>
             <div style={{ fontSize: 10, color: 'var(--text-secondary)', textTransform: 'uppercase', fontWeight: 600 }}>Total Clients</div>
-            <strong style={{ fontSize: 13, color: 'var(--text-primary)' }}>{clients.length} Registered Owners</strong>
+            <strong style={{ fontSize: 13, color: 'var(--text-primary)' }}>{clients.length} Registered Retailers</strong>
           </div>
         </div>
 
@@ -362,7 +362,7 @@ export const DistributorClientsPage: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <Building2 size={16} color="var(--primary-color)" />
             <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 13.5 }}>
-              Active Station Owners &amp; Station Allowances
+              Active Station Retailers &amp; Station Allowances
             </span>
           </div>
         }
@@ -388,19 +388,19 @@ export const DistributorClientsPage: React.FC = () => {
         title={
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <UserPlus size={18} color="var(--primary-color)" />
-            <span style={{ fontWeight: 800 }}>Onboard New Station Owner</span>
+            <span style={{ fontWeight: 800 }}>Onboard New Station Retailer</span>
           </div>
         }
         open={isOnboardModalOpen}
         onCancel={() => setIsOnboardModalOpen(false)}
         onOk={handleOnboardClient}
-        okText="Onboard Owner"
+        okText="Onboard Retailer"
         cancelText="Cancel"
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 10 }}>
           <div>
             <label style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 4 }}>
-              Station Owner Name:
+              Station Retailer Name:
             </label>
             <Input
               placeholder="e.g. Ramesh Sharma"
@@ -497,7 +497,7 @@ export const DistributorClientsPage: React.FC = () => {
             }}
           >
             <CheckCircle2 size={14} color="#2563EB" />
-            <span>New station owner will automatically receive <strong>3 Free Stations</strong> allowance from Platform Admin.</span>
+            <span>New station retailer will automatically receive <strong>3 Free Stations</strong> allowance from Platform Admin.</span>
           </div>
         </div>
       </Modal>

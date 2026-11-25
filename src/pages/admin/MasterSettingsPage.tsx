@@ -27,33 +27,41 @@ export const MasterSettingsPage: React.FC = () => {
     },
     {
       title: 'Dates Active',
-      dataIndex: 'dates',
-      key: 'dates',
-      render: (dates: string) => (
-        <span style={{ color: 'var(--text-secondary)', fontSize: 12 }}>{dates}</span>
+      dataIndex: 'date',
+      key: 'date',
+      render: (date: string, r: any) => (
+        <span style={{ color: 'var(--text-secondary)', fontSize: 12 }}>{date || r?.date || r?.dates || 'Ongoing'}</span>
       ),
     },
     {
       title: 'Demand Multiplier',
-      dataIndex: 'multiplier',
-      key: 'multiplier',
-      render: (m: number) => (
-        <Tag color="orange" style={{ fontWeight: 600 }}>
-          +{Math.round((m - 1) * 100)}% Surge ({m}x)
-        </Tag>
-      ),
+      dataIndex: 'surgeMultiplier',
+      key: 'surgeMultiplier',
+      render: (m: number, r: any) => {
+        const mult = m ?? r?.surgeMultiplier ?? r?.multiplier ?? 1.15;
+        return (
+          <Tag color="orange" style={{ fontWeight: 600 }}>
+            +{Math.round((mult - 1) * 100)}% Surge ({mult}x)
+          </Tag>
+        );
+      },
     },
     {
-      title: 'Affected Fuel Types',
-      dataIndex: 'fuelTypes',
-      key: 'fuelTypes',
-      render: (types: string[]) => (
-        <Space size={4}>
-          {types.map((t, idx) => (
-            <Tag key={idx} color="blue">{t}</Tag>
-          ))}
-        </Space>
-      ),
+      title: 'Scope & Fuel Types',
+      dataIndex: 'impactType',
+      key: 'impactType',
+      render: (impact: string, r: any) => {
+        const types: string[] = Array.isArray(r?.fuelTypes) ? r.fuelTypes : ['Petrol & Diesel'];
+        const impactLabel = impact || r?.impactType || 'Regional';
+        return (
+          <Space size={4}>
+            <Tag color="cyan">{impactLabel}</Tag>
+            {types.map((t, idx) => (
+              <Tag key={idx} color="blue">{t}</Tag>
+            ))}
+          </Space>
+        );
+      },
     },
   ];
 

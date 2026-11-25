@@ -109,7 +109,7 @@ export const AppHeader: React.FC = () => {
                 {currentUser?.role === 'ADMIN'
                   ? 'Platform Super Admin'
                   : currentUser?.role === 'DEALER'
-                    ? 'Station Owner'
+                    ? 'Station Retailer'
                     : 'Regional Distributor'}
               </span>
             </div>

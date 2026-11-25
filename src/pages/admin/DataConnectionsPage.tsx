@@ -13,8 +13,8 @@ export const DataConnectionsPage: React.FC = () => {
     }, 1200);
   };
 
-  const handleNudgeOwner = (name: string) => {
-    message.success(`Automated WhatsApp nudge sent to station owner at ${name}!`);
+  const handleNudgeRetailer = (name: string) => {
+    message.success(`Automated WhatsApp nudge sent to station retailer at ${name}!`);
   };
 
   const failedSyncColumns = [
@@ -25,26 +25,27 @@ export const DataConnectionsPage: React.FC = () => {
       render: (text: string, r: any) => (
         <div>
           <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{text}</div>
-          <div style={{ fontSize: 11, color: 'var(--text-secondary)' }}>{r.distributorName}</div>
+          <div style={{ fontSize: 11, color: 'var(--text-secondary)' }}>{r.city || r.distributorName || 'AP / TS'}</div>
         </div>
       ),
     },
     {
       title: 'Failure Category',
-      dataIndex: 'reason',
-      key: 'reason',
-      render: (reason: string) => {
+      dataIndex: 'failureReason',
+      key: 'failureReason',
+      render: (reason: string, r: any) => {
+        const val = reason || r?.failureReason || r?.reason || 'Sync Timeout';
         let color = 'error';
-        if (reason.includes('Dealer') || reason.includes('Owner')) color = 'warning';
-        return <Tag color={color}>{reason}</Tag>;
+        if (val.includes('Dealer') || val.includes('Owner') || val.includes('Retailer') || val.includes('typed')) color = 'warning';
+        return <Tag color={color}>{val}</Tag>;
       },
     },
     {
       title: 'Last Ping',
-      dataIndex: 'failedAt',
-      key: 'failedAt',
-      render: (time: string) => (
-        <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{time}</span>
+      dataIndex: 'lastAttempt',
+      key: 'lastAttempt',
+      render: (time: string, r: any) => (
+        <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{time || r?.lastAttempt || r?.failedAt || 'Just now'}</span>
       ),
     },
     {
@@ -65,9 +66,9 @@ export const DataConnectionsPage: React.FC = () => {
           <Button
             size="small"
             icon={<WhatsAppOutlined style={{ color: '#25D366' }} />}
-            onClick={() => handleNudgeOwner(r.pumpName)}
+            onClick={() => handleNudgeRetailer(r.pumpName)}
           >
-            Nudge Owner
+            Nudge Retailer
           </Button>
         </Space>
       ),
