@@ -48,7 +48,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed, onToggleColla
     {
       key: '/dealer/dashboard',
       icon: <LayoutDashboard size={18} />,
-      label: 'Station Telemetry',
+      label: 'Dashboard',
     },
     {
       key: '/dealer/forecast',
@@ -87,7 +87,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed, onToggleColla
     {
       key: '/distributor/dashboard',
       icon: <LayoutDashboard size={18} />,
-      label: ' Dashboard',
+      label: 'Dashboard',
     },
     {
       key: '/distributor/dashboard/map',

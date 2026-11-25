@@ -3,7 +3,6 @@ import React from 'react';
 import { Card, Descriptions, Tag, Row, Col } from 'antd';
 import {
   Building2,
-  ShieldCheck,
   Fuel,
 } from 'lucide-react';
 
@@ -74,6 +73,7 @@ export const DealerProfilePage: React.FC = () => {
         {/* Right Column: Depot & Hardware Assets */}
         <Col xs={24} lg={10}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            {/* Depot Supply Agreement Card commented out
             <Card
               title={
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -97,6 +97,7 @@ export const DealerProfilePage: React.FC = () => {
                 </Descriptions.Item>
               </Descriptions>
             </Card>
+            */}
 
             <Card
               title={

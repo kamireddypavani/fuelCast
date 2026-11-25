@@ -1,12 +1,13 @@
 // src/pages/dealer/DealerOrdersPage.tsx
 import React, { useState } from 'react';
-import { Card, Table, Tag, Button, Modal, Form, Select, message, Badge, Space } from 'antd';
+import { Card, Table, Tag, Button, Modal, Form, Select, Input, message, Badge, Space, Row, Col } from 'antd';
 import {
   Truck,
   PlusCircle,
   Clock,
   MapPin,
   MessageSquare,
+  Pencil,
 } from 'lucide-react';
 import { MOCK_ORDERS } from '../../mock/fuelcastData';
 import type { RefillOrder, FuelType } from '../../types/fuelcast';
@@ -17,7 +18,10 @@ export const DealerOrdersPage: React.FC = () => {
     MOCK_ORDERS.filter((o) => o.pumpId === 'pump-1')
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingOrder, setEditingOrder] = useState<RefillOrder | null>(null);
   const [form] = Form.useForm();
+  const [editForm] = Form.useForm();
 
   const handleCreateOrder = (values: { fuelType: FuelType; quantityLiters: number }) => {
     const newOrder: RefillOrder = {
@@ -44,6 +48,42 @@ export const DealerOrdersPage: React.FC = () => {
     setIsModalOpen(false);
     form.resetFields();
     message.success('Refill request dispatched to BPCL Kondapalli Depot & Krishna Logistics!');
+  };
+
+  const handleOpenEditModal = (order: RefillOrder) => {
+    setEditingOrder(order);
+    editForm.setFieldsValue({
+      fuelType: order.fuelType,
+      quantityLiters: order.quantityLiters,
+      urgency: order.urgency || 'Routine',
+      notes: order.distributorNote || '',
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateOrder = (values: {
+    fuelType: FuelType;
+    quantityLiters: number;
+    urgency: 'Critical' | 'Warning' | 'Routine';
+    notes?: string;
+  }) => {
+    if (!editingOrder) return;
+    setOrders((prev) =>
+      prev.map((o) =>
+        o.id === editingOrder.id
+          ? {
+              ...o,
+              fuelType: values.fuelType as FuelType,
+              quantityLiters: values.quantityLiters,
+              urgency: values.urgency,
+              distributorNote: values.notes,
+            }
+          : o
+      )
+    );
+    setIsEditModalOpen(false);
+    setEditingOrder(null);
+    message.success(`Refill order ${editingOrder.orderNumber} successfully updated!`);
   };
 
   const getStageTag = (stage: RefillOrder['stage']) => {
@@ -129,7 +169,15 @@ export const DealerOrdersPage: React.FC = () => {
       title: 'Actions',
       key: 'actions',
       render: (_: unknown, r: RefillOrder) => (
-        <Space>
+        <Space size="small">
+          <Button
+            size="small"
+            icon={<Pencil size={13} color="#38bdf8" />}
+            onClick={() => handleOpenEditModal(r)}
+            style={{ fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}
+          >
+            Edit
+          </Button>
           {r.driverPhone && (
             <Button
               size="small"
@@ -231,14 +279,16 @@ export const DealerOrdersPage: React.FC = () => {
         onCancel={() => setIsModalOpen(false)}
         footer={null}
         destroyOnClose
+        centered
+        width={560}
       >
-        <div style={{ background: 'rgba(37, 99, 235, 0.08)', padding: 12, borderRadius: 8, marginBottom: 16 }}>
+        <div style={{ background: 'rgba(37, 99, 235, 0.08)', padding: '8px 12px', borderRadius: 8, marginBottom: 12 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#38bdf8', fontWeight: 600, fontSize: 12 }}>
             <MapPin size={13} />
             <span>Delivery Destination: Benz Circle, Vijayawada</span>
           </div>
           <div style={{ fontSize: 11, color: 'var(--text-secondary)', marginTop: 2 }}>
-            Supplying Depot: BPCL Kondapalli Depot • Estimated transit time: 45 mins
+            Supplying Depot: BPCL Kondapalli Depot • Transit time: 45 mins
           </div>
         </div>
 
@@ -248,6 +298,7 @@ export const DealerOrdersPage: React.FC = () => {
             label="Fuel Product"
             initialValue="Diesel"
             rules={[{ required: true }]}
+            style={{ marginBottom: 12 }}
           >
             <Select
               options={[
@@ -263,7 +314,8 @@ export const DealerOrdersPage: React.FC = () => {
             label="Refill Volume (Litres)"
             initialValue={12000}
             rules={[{ required: true }]}
-            extra="Depot tanker compartments are calibrated in 4,000 L multiples (e.g., 4k, 8k, 12k, 16k L)."
+            extra="Depot compartments: 4,000 L multiples (e.g., 4k, 8k, 12k, 16k L)."
+            style={{ marginBottom: 16 }}
           >
             <Select
               options={[
@@ -275,13 +327,137 @@ export const DealerOrdersPage: React.FC = () => {
             />
           </Form.Item>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 24 }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 16 }}>
             <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
             <Button type="primary" htmlType="submit">
               Confirm &amp; Transmit to Depot
             </Button>
           </div>
         </Form>
+      </Modal>
+
+      {/* Edit Order Modal */}
+      <Modal
+        title={
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <Pencil size={18} color="#2563eb" />
+            <span>Edit Refill Order — {editingOrder?.orderNumber}</span>
+          </div>
+        }
+        open={isEditModalOpen}
+        onCancel={() => {
+          setIsEditModalOpen(false);
+          setEditingOrder(null);
+        }}
+        footer={null}
+        destroyOnClose
+        centered
+        width={560}
+      >
+        {editingOrder && (
+          <div>
+            <div
+              style={{
+                background: 'rgba(56, 189, 248, 0.08)',
+                border: '1px solid rgba(56, 189, 248, 0.2)',
+                padding: '8px 12px',
+                borderRadius: 8,
+                marginBottom: 12,
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: 13 }}>
+                  {editingOrder.orderNumber}
+                </span>
+                <span style={{ fontSize: 12 }}>{getStageTag(editingOrder.stage)}</span>
+              </div>
+              <div style={{ fontSize: 11, color: 'var(--text-secondary)', marginTop: 2 }}>
+                Supplying Depot: {editingOrder.depot} • Destination: {editingOrder.location}
+              </div>
+            </div>
+
+            <Form form={editForm} layout="vertical" onFinish={handleUpdateOrder}>
+              <Row gutter={12}>
+                <Col span={12}>
+                  <Form.Item
+                    name="fuelType"
+                    label="Fuel Product"
+                    rules={[{ required: true, message: 'Please select fuel product' }]}
+                    style={{ marginBottom: 12 }}
+                  >
+                    <Select
+                      options={[
+                        { value: 'Diesel', label: 'Diesel (HSD) - Tank 1' },
+                        { value: 'Petrol', label: 'Petrol (MS) - Tank 2' },
+                        { value: 'Speed Petrol', label: 'Speed Petrol - Tank 3' },
+                      ]}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
+                    name="quantityLiters"
+                    label="Refill Volume (Litres)"
+                    rules={[{ required: true, message: 'Please select volume' }]}
+                    style={{ marginBottom: 12 }}
+                  >
+                    <Select
+                      options={[
+                        { value: 4000, label: '4,000 L (1 Bay)' },
+                        { value: 8000, label: '8,000 L (2 Bays)' },
+                        { value: 12000, label: '12,000 L (3 Bays - Full)' },
+                        { value: 16000, label: '16,000 L (4 Bays - Heavy)' },
+                        { value: 20000, label: '20,000 L (5 Bays - Super)' },
+                      ]}
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              <Row gutter={12}>
+                <Col span={12}>
+                  <Form.Item
+                    name="urgency"
+                    label="Order Priority"
+                    rules={[{ required: true }]}
+                    style={{ marginBottom: 12 }}
+                  >
+                    <Select
+                      options={[
+                        { value: 'Critical', label: '🔴 Critical (< 2 Days)' },
+                        { value: 'Warning', label: '🟡 Warning (Buffer Low)' },
+                        { value: 'Routine', label: '🟢 Routine (Standard)' },
+                      ]}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
+                    name="notes"
+                    label="Special Instructions"
+                    style={{ marginBottom: 12 }}
+                  >
+                    <Input placeholder="e.g. Expedite delivery" />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 14 }}>
+                <Button
+                  onClick={() => {
+                    setIsEditModalOpen(false);
+                    setEditingOrder(null);
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button type="primary" htmlType="submit" style={{ fontWeight: 600 }}>
+                  Save Order Updates
+                </Button>
+              </div>
+            </Form>
+          </div>
+        )}
       </Modal>
     </div>
   );
